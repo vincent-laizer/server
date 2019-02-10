@@ -1,10 +1,30 @@
-const http = require('http');
+//1.
+var http = require('http');
+var fs = require('fs');
+//2.
 const port=process.env.PORT || 3000
-const server = http.createServer((req, res) => {
-res.statusCode = 200;
-res.setHeader('Content-Type', 'text/html');
-res.end('<h1><center>Hello World</center></h1>');
+var server = http.createServer(function (req, resp) {
+    //3.
+    if (req.url === "/create") {
+        fs.readFile("AppPages/MyPage.html", function (error, pgResp) {
+            if (error) {
+                resp.writeHead(404);
+                resp.write('Contents you are looking are Not Found');
+            } else {
+                resp.writeHead(200, { 'Content-Type': 'text/html' });
+                resp.write(pgResp);
+            }
+             
+            resp.end();
+        });
+    } else {
+        //4.
+        resp.writeHead(200, { 'Content-Type': 'text/html' });
+        resp.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ' + req.url);
+        resp.end();
+    }
 });
-server.listen(port,() => {
-console.log(`Server running at port `+port);
-});
+//5.
+server.listen(port);
+ 
+console.log('Server Started listening on 5050');
