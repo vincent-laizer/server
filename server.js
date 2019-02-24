@@ -6,12 +6,12 @@ const port=process.env.PORT || 3000
 var server = http.createServer(function (req, resp) {
     //3.
     if (req.url === "/") {
-        fs.readFile("FemaBoard.html", function (error, pgResp) {
+        fs.readFile("data.txt", function (error, pgResp) {
             if (error) {
                 resp.writeHead(404);
                 resp.write('Contents you are looking are Not Found');
             } else {
-                resp.writeHead(200, { 'Content-Type': 'text/html' });
+                resp.writeHead(200, { 'Content-Type': 'text/plain' });
                 resp.write(pgResp);
             }
              
