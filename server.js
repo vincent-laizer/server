@@ -1,31 +1,31 @@
-var fs = require("fs");
+//1.
 var http = require('http');
-var url = require('url');
-
-//define the port
-const port=process.env.PORT || 3000;
-
-//create the server
-http.createServer(function(req,res){
-  res.writeHead(200,{'content-Type':'text/html'});
-
-  //reading the query string
-  var query = url.parse(req.url,true).query;
-  var fileName = query.file;
-
-  //reading files
-  fs.readFile(fileName,function(err,data){
-    if(err){
-      console.log("Error in opening: "+fileName);
+var fs = require('fs');
+//2.
+const port=process.env.PORT || 3000
+var server = http.createServer(function (req, resp) {
+    //3.
+    if (req.url === "/") {
+        fs.readFile("data.txt", function (error, pgResp) {
+            if (error) {
+                resp.writeHead(404);
+                resp.write('Contents you are looking are Not Found');
+            } else {
+                resp.writeHead(200, { 'Content-Type': 'text/plain' });
+                resp.write("You are accessing this content from: " + req.url + "\n");
+                resp.write(pgResp);
+            }
+             
+            resp.end();
+        });
+    } else {
+        //4.
+        resp.writeHead(404, { 'Content-Type': 'text/html' });
+        resp.write('<h1>Invalid URL</h1><br /><br />The file you are looking for is not found.);
+        resp.end();
     }
-    else{
-      console.log("File read succesfully");
-
-      //sending the content to client
-      content = data.toString();
-      res.write(content);
-    }
-  });
-
-
-}).listen(port);
+});
+//5.
+server.listen(port);
+ 
+console.log('Server Started listening on 5050');
