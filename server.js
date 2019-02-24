@@ -12,6 +12,7 @@ var server = http.createServer(function (req, resp) {
                 resp.write('Contents you are looking are Not Found');
             } else {
                 resp.writeHead(200, { 'Content-Type': 'text/plain' });
+                resp.write("You are accessing this content from:" + req.url);
                 resp.write(pgResp);
             }
              
