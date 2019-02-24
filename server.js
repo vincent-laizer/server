@@ -21,7 +21,7 @@ var server = http.createServer(function (req, resp) {
     } else {
         //4.
         resp.writeHead(404, { 'Content-Type': 'text/html' });
-        resp.write('<h1>Invalid URL</h1><br /><br />The file you are looking for is not found.);
+        resp.write('<h1>Invalid URL</h1><br /><br />The file you are looking for is not found.');
         resp.end();
     }
 });
