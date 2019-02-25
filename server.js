@@ -1,7 +1,7 @@
 var http = require("http");
 
 //variable system defined port
-port = process.env.port||3000;
+var port = process.env.port||3000;
 
 //creating the server
 http.createServer(function(req,res){
