@@ -1,8 +1,19 @@
+var http = require("http");
 var http = require('http');
 var url = require('url');
 
+//variable system defined port
+var port = process.env.port||7000;
 var port = process.env.port||4000;
 
+//creating the server
+http.createServer(function(req,res){
+
+    res.writeHead(200,{
+        'content-Type':"text/html"
+    });
+    res.write("its working!!");
+    res.end();
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'});
   var q = url.parse(req.url, true).query;
