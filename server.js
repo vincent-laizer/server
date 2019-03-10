@@ -1,10 +1,27 @@
 var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
 
-//variable system defined port
-var port = process.env.port||3000;
+var port = process.env.port||8080;
 
-//create a server object:
 http.createServer(function (req, res) {
-  res.write('Hello World!'); //write a response to the client
-  res.end(); //end the response
-}).listen(port); //the server object listens on port 8080
+  if (req.url == '/fileupload') {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = 'C:/Users/Your Name/' + files.filetoupload.name;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        res.write('File uploaded and moved!');
+        res.end();
+      });
+ });
+  } else {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="filetoupload"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
+  }
+}).listen(port);
