@@ -1,30 +1,27 @@
-//1.
 var http = require('http');
+var formidable = require('formidable');
 var fs = require('fs');
-//2.
-const port=process.env.PORT || 3000
-var server = http.createServer(function (req, resp) {
-    //3.
-    if (req.url === "/") {
-        fs.readFile("index", function (error, pgResp) {
-            if (error) {
-                resp.writeHead(404);
-                resp.write('Contents you are looking are Not Found');
-            } else {
-                resp.writeHead(200, { 'Content-Type': 'text/html' });
-                resp.write(pgResp);
-            }
-             
-            resp.end();
-        });
-    } else {
-        //4.
-        resp.writeHead(200, { 'Content-Type': 'text/html' });
-        resp.write('<h1>Product Manaager</h1><br /><br />To create product please enter: ' + req.url);
-        resp.end();
-    }
-});
-//5.
-server.listen(port);
- 
-console.log('Server Started listening on 5050');
+
+var port = process.env.port||3000;
+
+http.createServer(function (req, res) {
+  if (req.url == '/fileupload') {
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+      var oldpath = files.filetoupload.path;
+      var newpath = 'C:/Users/Your Name/' + files.filetoupload.name;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        res.write('File uploaded and moved!');
+        res.end();
+      });
+ });
+  } else {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<form action="fileupload" method="post" enctype="multipart/form-data">');
+    res.write('<input type="file" name="filetoupload"><br>');
+    res.write('<input type="submit">');
+    res.write('</form>');
+    return res.end();
+  }
+}).listen(port);
