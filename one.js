@@ -4,5 +4,6 @@ const port = process.env.port||3000;
 
 http.createServer(function(req,res){
 
-  res.end("help");
-});
+  res.writeHead(200);
+  
+}).listen(port);
