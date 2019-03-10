@@ -1,6 +1,6 @@
 var http = require("http");
 
-var port = sys.env.port||3000;
+var port = process.env.PORT || 3000;
 
 http.createServer(function(req,res){
 
