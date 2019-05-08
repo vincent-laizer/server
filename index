@@ -1,9 +1,31 @@
 <html>
 <head>
 <title>code crazy</title>
+
+<style media ="screen">
+body{
+   text-align:center;
+   font-family:sans-serif;
+}
+canvas{
+   background-color:black;
+}
+</style>
 </head>
 <body>
-<h1><center>Code Crazy</h1></center>
-<p>We love cats and code</p>
+
+<center>
+<h1>THE GAME</h1>
+
+<canvas id="display" width="1200" height="580">
+</canvas>
+
+</center>
+
+<script>
+var canvas = document.getElementById("display");
+var context = canvas.getContext("2d");
+
+</script>
 </body>
 </html>
