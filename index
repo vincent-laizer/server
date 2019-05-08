@@ -26,6 +26,14 @@ canvas{
 var canvas = document.getElementById("display");
 var context = canvas.getContext("2d");
 
+context.fillStyle = "#00ff00";
+context.strokeStyle = "#009900";
+
+context.beginPath();
+context.arc(500,400,50,0,MATH.PI*2);
+context.fill();
+context.stroke();
+
 </script>
 </body>
 </html>
