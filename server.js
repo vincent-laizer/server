@@ -6,7 +6,7 @@ const port=process.env.PORT || 3000
 var server = http.createServer(function (req, resp) {
     //3.
     if (req.url === "/") {
-        fs.readFile("index", function (error, pgResp) {
+        fs.readFile("project", function (error, pgResp) {
             if (error) {
                 resp.writeHead(404);
                 resp.write('Contents you are looking are Not Found');
