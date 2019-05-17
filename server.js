@@ -17,6 +17,7 @@ var server = http.createServer(function (req, resp) {
              
             resp.end();
         });
+        
     else if(req.url === "/report"){
         fs.readFile("yst", function (error, pgResp) {
             if (error) {
@@ -24,12 +25,13 @@ var server = http.createServer(function (req, resp) {
                 resp.write('Contents you are looking are Not Found');
             } else {
                 resp.writeHead(200, { 'Content-Type': 'text/html' });
-                resp.write("<h2></h2>Thank you for downloading");
+                resp.write("<h2>Thank you for downloading</h2>");
             }
              
             resp.end();
-    }
-    } else {
+            }   
+                    
+        else {
         //4.
         resp.writeHead(200, { 'Content-Type': 'text/html' });
         resp.write("<b>The content you are looking for is not found!!</b>");
