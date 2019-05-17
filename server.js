@@ -17,7 +17,7 @@ var server = http.createServer(function (req, resp) {
              
             resp.end();
         });
-        
+    }
     else if(req.url === "/report"){
         fs.readFile("yst", function (error, pgResp) {
             if (error) {
@@ -29,7 +29,8 @@ var server = http.createServer(function (req, resp) {
             }
              
             resp.end();
-            }   
+            });
+    }
                     
         else {
         //4.
