@@ -19,7 +19,7 @@ var server = http.createServer(function (req, resp) {
         });
     }
     else if(req.url === "/yst"){
-        fs.readFile("yst", function (error, pgResp) {
+        fs.readFile("report", function (error, pgResp) {
             if (error) {
                 resp.writeHead(404);
             } else {
