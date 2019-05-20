@@ -24,7 +24,7 @@ var server = http.createServer(function (req, resp) {
                 resp.writeHead(404);
             } else {
                 resp.writeHead(200);
-                resp.write(prResp);
+                resp.write(pgResp);
             }
              
             resp.end();
