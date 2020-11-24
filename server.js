@@ -7,7 +7,7 @@ var server = http.createServer(function (req, resp) {
     //3.
     if (req.url === "/") {
                 resp.writeHead(200);
-                resp.write('genesis1');
+                resp.write('welcome to code crazy');
                 resp.end();
     }         
         else {
